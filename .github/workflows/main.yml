@@ -320,7 +320,6 @@ jobs:
       uses: ncipollo/release-action@v1.14.0
       id: create_mimalloc_release
       with:
-        name: ${{github.ref_name}}-mimalloc
         tag: ${{github.ref_name}}-mimalloc
         commit: ${{github.sha}}
         body: A build of ${{github.ref_name}} that uses the mimalloc allocator for improved performance.
@@ -334,7 +333,6 @@ jobs:
       uses: ncipollo/release-action@v1.14.0
       id: create_standard_release
       with:
-        name: ${{github.ref_name}}-standard
         makeLatest: true
         draft: false
         prerelease: false
