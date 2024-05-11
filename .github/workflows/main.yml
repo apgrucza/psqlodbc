@@ -315,15 +315,6 @@ jobs:
     #     retention-days: 5
     #     if-no-files-found: error
 
-    - name: Create Standard Release
-      if: startsWith(github.ref, 'refs/tags/REL-')
-      uses: ncipollo/release-action@v1.14.0
-      id: create_standard_release
-      with:
-        draft: false
-        prerelease: false
-        token: ${{secrets.GITHUB_TOKEN}}
-        artifacts: "winbuild/standard/installer/x64/*.ms?,winbuild/standard/installer/x86/*.ms?,winbuild/standard/installer/psqlodbc-setup/bin/Release/psqlodbc-setup.exe"
     - name: Create mimalloc Release
       if: startsWith(github.ref, 'refs/tags/REL-')
       uses: ncipollo/release-action@v1.14.0
@@ -331,8 +322,17 @@ jobs:
       with:
         tag: ${{github.ref_name}}-mimalloc
         commit: ${{github.sha}}
-        makeLatest: "false"
         draft: false
         prerelease: false
         token: ${{secrets.GITHUB_TOKEN}}
         artifacts: "winbuild/mimalloc/installer/x64/*.ms?,winbuild/mimalloc/installer/x86/*.ms?,winbuild/mimalloc/installer/psqlodbc-setup/bin/Release/psqlodbc-setup.exe"
+    - name: Create Standard Release
+      if: startsWith(github.ref, 'refs/tags/REL-')
+      uses: ncipollo/release-action@v1.14.0
+      id: create_standard_release
+      with:
+        makeLatest: true
+        draft: false
+        prerelease: false
+        token: ${{secrets.GITHUB_TOKEN}}
+        artifacts: "winbuild/standard/installer/x64/*.ms?,winbuild/standard/installer/x86/*.ms?,winbuild/standard/installer/psqlodbc-setup/bin/Release/psqlodbc-setup.exe"
