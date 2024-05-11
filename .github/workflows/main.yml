@@ -3,7 +3,7 @@ run-name: psql ODBC CI - ${{ github.event.head_commit.message }}
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "mimalloc-release" ]
     tags:
       - 'REL-*'
   pull_request:
@@ -315,12 +315,22 @@ jobs:
         retention-days: 5
         if-no-files-found: error
 
-    - name: Create Release
+    - name: Create Standard Release
       if: startsWith(github.ref, 'refs/tags/REL-')
       uses: ncipollo/release-action@v1.14.0
-      id: create_release
+      id: create_standard_release
       with:
         draft: false
         prerelease: false
         token: ${{secrets.RELEASE_TOKEN}}
         artifacts: "winbuild/standard/installer/x64/*.ms?,winbuild/standard/installer/x86/*.ms?,winbuild/standard/installer/psqlodbc-setup/bin/Release/psqlodbc-setup.exe"
+    - name: Create mimalloc Release
+      if: startsWith(github.ref, 'refs/tags/REL-')
+      uses: ncipollo/release-action@v1.14.0
+      id: create_mimalloc_release
+      with:
+        name: ${{github.ref_name}}-mimalloc
+        draft: false
+        prerelease: false
+        token: ${{secrets.RELEASE_TOKEN}}
+        artifacts: "winbuild/mimalloc/installer/x64/*.ms?,winbuild/mimalloc/installer/x86/*.ms?,winbuild/mimalloc/installer/psqlodbc-setup/bin/Release/psqlodbc-setup.exe"
