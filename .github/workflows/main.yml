@@ -331,7 +331,7 @@ jobs:
       with:
         tag: ${{github.ref_name}}-mimalloc
         commit: ${{github.sha}}
-        makeLatest: false
+        makeLatest: "false"
         draft: false
         prerelease: false
         token: ${{secrets.GITHUB_TOKEN}}
