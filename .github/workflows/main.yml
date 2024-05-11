@@ -321,7 +321,7 @@ jobs:
       id: create_mimalloc_release
       with:
         name: ${{github.ref_name}}-mimalloc
-        tag: ${{github.ref_name}}-mimalloc
+        tag: A${{github.ref_name}}-mimalloc
         commit: ${{github.sha}}
         makeLatest: false
         draft: false
