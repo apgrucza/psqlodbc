@@ -333,7 +333,7 @@ jobs:
       uses: ncipollo/release-action@v1.14.0
       id: create_standard_release
       with:
-        name: ${{github.ref_name}}-standard
+        name: ${{github.ref_name}}-default
         makeLatest: true
         draft: false
         prerelease: false
