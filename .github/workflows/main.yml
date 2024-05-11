@@ -330,6 +330,7 @@ jobs:
       id: create_mimalloc_release
       with:
         tag: ${{github.ref_name}}-mimalloc
+        commit: ${{github.sha}}
         draft: false
         prerelease: false
         token: ${{secrets.GITHUB_TOKEN}}
